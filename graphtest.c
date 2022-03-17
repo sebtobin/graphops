@@ -24,10 +24,11 @@ main(int argc, char **argv) {
     int array[5] = {0, 1, 2, 3, 4};
     int i;
 
+    fprintf(stdout, "Data Array:\n\n");
     for (i=0; i<arrayLength; i++) {
-        printf("%d, ", array[i]);
+        fprintf(stdout, "%d, ", array[i]);
     }
-    printf("\n\n");
+    fprintf(stdout, "\n\n");
 
     graphNode_t *prev = NULL, *curr = NULL;
     for (i=0; i<arrayLength; i++) {
@@ -58,7 +59,7 @@ void
 printAdjacencyList(graph_t *graph, FILE* out) {
     int i, j;
     listNode_t *curr = NULL;
-    printf("\nAdjacency List:\n\n");
+    fprintf(out, "Adjacency List:\n\n");
     for (i = 0; i < graph->nodesTable->size; i++) {
         if ((curr = graph->nodesTable->array[i]) != NULL) {
             while (curr != NULL) {
@@ -71,13 +72,13 @@ printAdjacencyList(graph_t *graph, FILE* out) {
             }
         }
     }
-    printf("\n");
+    fprintf(out, "\n");
 }
 
 void
 printTable(hashTable_t *table, FILE *out) {
     listNode_t *curr = NULL;
-    printf("\nHash Table:\n\n");
+    fprintf(out, "Hash Table:\n\n");
     for (int i = 0; i < table->size; i++) {
         fprintf(out, "Index %d: ", i);
         curr = table->array[i];
@@ -87,5 +88,5 @@ printTable(hashTable_t *table, FILE *out) {
         }
         fprintf(out, "\n");
     }
-    printf("\n");
+    fprintf(out, "\n");
 }

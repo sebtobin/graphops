@@ -6,10 +6,6 @@
 
 #include "hashops.h"
 
-/* macros */
-
-#define INIT_NEXT_NODES_SIZE 1
-
 /* structs */
 
 typedef struct graphNode {
@@ -17,22 +13,24 @@ typedef struct graphNode {
     struct graphNode **nextNodes;
     size_t nextNodesSize;
     int nextNodesLength;
-    void* data;
+    void *data;
 } graphNode_t;
 
 typedef struct graph {
     hashTable_t *nodesTable;
     int nNodes;
-    /* to be implemented
+    /* TBD
     graphNode_t **subGraphs;
      */
 } graph_t;
 
 /* prototypes */
 
-graph_t* graphCreate(size_t tableSize, int (*hashData)(size_t, void*), int (*dataCmp)(void* data1, void *data2));
-graphNode_t* graphNewNode(void* data);
+graph_t* graphCreate(size_t tableSize, int (*hashData)(size_t, void*), int (*dataCmp)(void*, void*));
+graphNode_t* graphNewNode(void *data);
 graphNode_t* graphInsertEdge(graphNode_t *from, graphNode_t *to);
-graphNode_t* graphInsertNode(graph_t *graph, void* data, graphNode_t **from, int nFrom, graphNode_t **to, int nTo);
+graphNode_t* graphInsertNode(graph_t *graph, void *data, graphNode_t **from, int nFrom, graphNode_t **to, int nTo);
+void graphFreeGraph(graph_t *graph);
+void graphFreeGraphAndData(graph_t *graph, void (*freeData)(void*));
 
 #endif
