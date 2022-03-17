@@ -23,7 +23,7 @@
  * *dataCmp - cmp function for the data, return 0 for equal, else return not 0
  */
 hashTable_t*
-hashCreate(size_t size, int (*hashData)(size_t, void*), int (*dataCmp)(void* data1, void *data2)) {
+hashCreate(size_t size, int (*hashData)(size_t, void*), int (*dataCmp)(void*, void*)) {
     /* create new hash table struct */
     hashTable_t *table = (hashTable_t*)malloc(sizeof(hashTable_t));
     assert(table);
