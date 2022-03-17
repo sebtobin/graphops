@@ -1,4 +1,8 @@
 *.o
 graphtest
 hashtest
+.DS_Store
+.idea/
+CMakeLists.txt
+cmake-build-debug/
 
