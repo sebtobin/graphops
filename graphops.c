@@ -107,13 +107,35 @@ graphInsertNode(graph_t *graph, void *data, graphNode_t **from, int nFrom, graph
     return newNode;
 }
 
+/* Frees a graph node, to be passed to free hash table function
+ * to free all nodes in the table
+ * PARAMS:
+ * *node - node to be freed
+ */
+void
+freeGraphNode(void *node) {
+    free(((graphNode_t*)node)->nextNodes);
+    free(node);
+}
+
+/* Frees a graph node and frees the data void ptr, assumes that the
+ * data struct does not include further pointers that need to be freed
+ * PARAMS:
+ * *node - node to be freed
+ */
+void
+freeGraphNodeAndData(void *node) {
+    free(((graphNode_t*)node)->data);
+    freeGraphNode(node);
+}
+
 /* Frees node table and graph, does not free data
  * PARAMS:
  * *graph - graph to be freed
  */
 void
 graphFreeGraph(graph_t *graph) {
-    hashFreeTable(graph->nodesTable);
+    hashFreeTableAndData(graph->nodesTable, &graphFreeNode);
     free(graph);
 }
 
